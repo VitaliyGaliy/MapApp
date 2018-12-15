@@ -1,1 +1,1 @@
-export { default as setSuppliersList } from './suppliers';
+export { default as suppliersList } from './suppliers';

@@ -23,3 +23,7 @@ export const setSuppliersList = grid => {
         suppliersList
     };
 };
+
+export const actions = {
+    setSuppliersList
+}

@@ -24,8 +24,4 @@ const TabNav = createBottomTabNavigator(
     }
 );
 
-// export default createSwitchNavigator({
-//     StackNav,
-// });
-
 export default createAppContainer(TabNav);
