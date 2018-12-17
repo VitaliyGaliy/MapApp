@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {
   Platform, StyleSheet, Text, View,
 } from 'react-native';
+import Ionicons from 'react-native-vector-icons/dist/Ionicons';
+import CompanyCard from '../../components/CompanyCard/CompanyCard';
+import styles from './styles';
 
 export default class SuppliersScreen extends Component {
   static navigationOptions = {
@@ -11,27 +14,30 @@ export default class SuppliersScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to Suppliers Screen!</Text>
+        <View style={styles.headerContainer}>
+          <View style={[styles.button]}>
+            <Ionicons
+              style={styles.itemIcon}
+              name="ios-mail"
+              size={14}
+              color="#900"
+            />
+            <Text>Overzicht</Text>
+          </View>
+          <View style={[styles.button,
+          { borderLeftWidth: 1, borderLeftColor: '#dcdcdc' }]}
+          >
+            <Ionicons
+              style={styles.itemIcon}
+              name="ios-mail"
+              size={14}
+              color="#900"
+            />
+            <Text>Map</Text>
+          </View>
+        </View>
+        <CompanyCard />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});

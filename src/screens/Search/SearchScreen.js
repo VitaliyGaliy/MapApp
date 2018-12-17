@@ -3,9 +3,11 @@ import {
   Platform, StyleSheet, Text, View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import styles from './styles';
 
 import { actions } from '../../models/suppliers';
+import Map from '../../components/Map/Map';
+import HorizontalSlider from '../../components/HorizontalSlider/HorizontalSlider';
 
 class SearchScreen extends Component {
   static navigationOptions = {
@@ -15,16 +17,9 @@ class SearchScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <MapView
-          provider={PROVIDER_GOOGLE} // remove if not using Google Maps
-          style={styles.map}
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-        />
+        <Map />
+        <HorizontalSlider />
+
       </View>
     );
   }
@@ -38,22 +33,3 @@ const mapStateToProps = state => ({
 //     navigation: PropTypes.object.isRequired,
 // };
 export default connect(mapStateToProps, actions)(SearchScreen);
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-});

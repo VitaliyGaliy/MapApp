@@ -1,27 +1,28 @@
 import {
     createBottomTabNavigator,
     createStackNavigator,
-    createAppContainer
+    createAppContainer,
 }
     from 'react-navigation';
 
 import SuppliersScreen from '../screens/Suppliers/SuppliersScreen';
-import SearchScreen from '../screens/Search/SearchScreen';
+// import SearchScreen from '../screens/Search/SearchScreen';
+import CompanyesList from '../screens/CompanyesList/CompanyesList';
 
 
 const TabNav = createBottomTabNavigator(
     {
         Suppliers: createStackNavigator({
             Suppliers: {
-                screen: SuppliersScreen
+                screen: SuppliersScreen,
             },
         }),
         Search: createStackNavigator({
             Search: {
-                screen: SearchScreen
+                screen: CompanyesList,
             },
         }),
-    }
+    },
 );
 
 export default createAppContainer(TabNav);
