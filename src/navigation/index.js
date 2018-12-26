@@ -1,28 +1,28 @@
 import {
-    createBottomTabNavigator,
-    createStackNavigator,
-    createAppContainer,
+  createBottomTabNavigator,
+  createStackNavigator,
+  createAppContainer,
 }
-    from 'react-navigation';
+  from 'react-navigation';
 
 import SuppliersScreen from '../screens/Suppliers/SuppliersScreen';
-// import SearchScreen from '../screens/Search/SearchScreen';
-import CompanyesList from '../screens/CompanyesList/CompanyesList';
+import SearchScreen from '../screens/Search/SearchScreen';
+// import CompanyesList from '../screens/CompanyesList/CompanyesList';
 
 
 const TabNav = createBottomTabNavigator(
-    {
-        Suppliers: createStackNavigator({
-            Suppliers: {
-                screen: SuppliersScreen,
-            },
-        }),
-        Search: createStackNavigator({
-            Search: {
-                screen: CompanyesList,
-            },
-        }),
-    },
+  {
+    Suppliers: createStackNavigator({
+      Suppliers: {
+        screen: SuppliersScreen,
+      },
+    }),
+    Search: createStackNavigator({
+      Search: {
+        screen: SearchScreen,
+      },
+    }),
+  },
 );
 
 export default createAppContainer(TabNav);
