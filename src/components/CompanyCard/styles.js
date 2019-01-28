@@ -24,7 +24,8 @@ export default StyleSheet.create({
   image: {
     width: 120,
     height: 120,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
+    backgroundColor: 'white',
   },
   infoWrapper: {
     flex: 1,

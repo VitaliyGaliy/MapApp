@@ -5,21 +5,21 @@ import {
 }
   from 'react-navigation';
 
-import SuppliersScreen from '../screens/Suppliers/SuppliersScreen';
-import SearchScreen from '../screens/Search/SearchScreen';
-// import CompanyesList from '../screens/CompanyesList/CompanyesList';
-
+import { SuppliersScreen, SearchList, SearchResult } from '../screens';
 
 const TabNav = createBottomTabNavigator(
   {
-    Suppliers: createStackNavigator({
-      Suppliers: {
-        screen: SuppliersScreen,
+    SearchListTab: createStackNavigator({
+      SearchList: {
+        screen: SearchList,
+      },
+      SearchResult: {
+        screen: SearchResult,
       },
     }),
-    Search: createStackNavigator({
-      Search: {
-        screen: SearchScreen,
+    SuppliersTab: createStackNavigator({
+      Suppliers: {
+        screen: SuppliersScreen,
       },
     }),
   },

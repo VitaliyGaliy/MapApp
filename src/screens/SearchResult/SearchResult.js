@@ -5,31 +5,31 @@ import {
 import { connect } from 'react-redux';
 import styles from './styles';
 
-import { actions } from '../../models/suppliers';
+import { actions } from '../../models/search';
 import Map from '../../components/Map/Map';
 import HorizontalSlider from '../../components/HorizontalSlider/HorizontalSlider';
 
-class SearchScreen extends Component {
+class SearchResult extends Component {
   static navigationOptions = {
-    title: 'Search',
+    title: 'SearchResult',
   }
 
   render() {
+    const { searchList: { items } } = this.props;
     return (
       <View style={styles.container}>
-        <Map />
-        <HorizontalSlider />
-
+        <Map items={items} />
+        <HorizontalSlider items={items} />
       </View>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  suppliersList: 22,
+  searchList: state.search.searchList,
 });
 
-// SearchScreen.propTypes = {
+// SearchResult.propTypes = {
 //     navigation: PropTypes.object.isRequired,
 // };
-export default connect(mapStateToProps, actions)(SearchScreen);
+export default connect(mapStateToProps, actions)(SearchResult);

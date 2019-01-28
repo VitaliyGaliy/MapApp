@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
-  Image, Text, View,
+  Image, Text, View, TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
@@ -9,107 +9,115 @@ import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import AntDesign from 'react-native-vector-icons/dist/AntDesign';
 import HeaderButton from '../HeaderButton/HeaderButton';
 
-import { actions } from '../../models/suppliers';
+import { actions } from '../../models/search';
 import styles from './styles';
 
 
-class SearchScreen extends Component {
-  render() {
-    const { customWidth } = this.props;
-    return (
-      <View style={[styles.container, { width: customWidth }]}>
-        <View style={styles.infoContainer}>
-          <View style={styles.imageWrapper}>
-            <Image
-              style={styles.image}
-              source={require('../../../assets/img/homerSimpson.jpg')}
-            />
-          </View>
+class CompanyCard extends Component {
 
-          <View style={styles.infoWrapper}>
-            <Text style={styles.mainTitle}>ABX Zaagmij</Text>
-            <View style={styles.itemWraper}>
-              <View style={styles.iconWraper}>
-                <Icon
-                  style={styles.itemIcon}
-                  name="map-marker"
-                  size={14}
-                  color="#900"
-                />
-              </View>
-              <Text style={styles.itemText}>GerderLand </Text>
+
+  render() {
+    const { customWidth, item, handler } = this.props;
+
+    return (
+      <TouchableOpacity
+        onPress={handler}
+        style={[styles.container, { width: customWidth }]}
+      >
+        <Fragment>
+          <View style={styles.infoContainer}>
+            <View style={styles.imageWrapper}>
+              <Image
+                style={styles.image}
+                source={{ uri: `https://veluweb.nl/2018/extranet/${item.avatar}` }}
+              />
             </View>
-            <View style={styles.itemWraper}>
-              <View style={styles.iconWraper}>
-                <Entypo
-                  style={styles.itemIcon}
-                  name="old-phone"
-                  size={14}
-                  color="#900"
-                />
+
+            <View style={styles.infoWrapper}>
+              <Text style={styles.mainTitle}>{item.c_name}</Text>
+              <View style={styles.itemWraper}>
+                <View style={styles.iconWraper}>
+                  <Icon
+                    style={styles.itemIcon}
+                    name="map-marker"
+                    size={14}
+                    color="#900"
+                  />
+                </View>
+                <Text style={styles.itemText}>{`${item.straat} ${item.huisnummer} ${item.provincie}`}</Text>
               </View>
-              <Text style={styles.itemText}>089 456 45 65</Text>
+              <View style={styles.itemWraper}>
+                <View style={styles.iconWraper}>
+                  <Entypo
+                    style={styles.itemIcon}
+                    name="old-phone"
+                    size={14}
+                    color="#900"
+                  />
+                </View>
+                <Text style={styles.itemText}>{item.c_phone}</Text>
+              </View>
+              <View style={styles.itemWraper}>
+                <View style={styles.iconWraper}>
+                  <Ionicons
+                    style={styles.itemIcon}
+                    name="ios-mail"
+                    size={14}
+                    color="#900"
+                  />
+                </View>
+                <Text style={styles.itemText}>{item.c_email}</Text>
+              </View>
+              <View style={styles.itemWraper}>
+                <View style={styles.iconWraper}>
+                  <Ionicons
+                    style={styles.itemIcon}
+                    name="ios-globe"
+                    size={14}
+                    color="#900"
+                  />
+                </View>
+                <Text style={styles.itemText}>{item.c_website}</Text>
+              </View>
             </View>
-            <View style={styles.itemWraper}>
-              <View style={styles.iconWraper}>
-                <Ionicons
-                  style={styles.itemIcon}
-                  name="ios-mail"
-                  size={14}
-                  color="#900"
-                />
-              </View>
-              <Text style={styles.itemText}>info@abex.com</Text>
-            </View>
-            <View style={styles.itemWraper}>
-              <View style={styles.iconWraper}>
-                <Ionicons
-                  style={styles.itemIcon}
-                  name="ios-globe"
-                  size={14}
-                  color="#900"
-                />
-              </View>
-              <Text style={styles.itemText}>www.zaagij.com</Text>
+            <View style={styles.rightSideContainer}>
+              <AntDesign
+                // style={styles.itemIcon}
+                name="star"
+                size={14}
+                color="#900"
+              />
+              <Text>14.2 km</Text>
             </View>
           </View>
-          <View style={styles.rightSideContainer}>
-            <AntDesign
-              // style={styles.itemIcon}
-              name="star"
-              size={14}
-              color="#900"
+          <View style={styles.buttonsWrapper}>
+            <HeaderButton
+              Icon={Ionicons}
+              text="bericht"
+              name="ios-mail"
             />
-            <Text>14.2 km</Text>
+            <HeaderButton
+              Icon={Entypo}
+              text="bell direct"
+              name="old-phone"
+            />
+            <HeaderButton
+              Icon={Ionicons}
+              text="delen"
+              name="ios-mail"
+            />
           </View>
-        </View>
-        <View style={styles.buttonsWrapper}>
-          <HeaderButton
-            Icon={Ionicons}
-            text="bericht"
-            name="ios-mail"
-          />
-          <HeaderButton
-            Icon={Entypo}
-            text="bell direct"
-            name="old-phone"
-          />
-          <HeaderButton
-            Icon={Ionicons}
-            text="delen"
-            name="ios-mail"
-          />
-        </View>
-      </View>
+        </Fragment>
+      </TouchableOpacity>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  suppliersList: 22,
+  // currentItemIndex: state.map.currentItemIndex,
 });
 
 // SearchScreen.propTypes = {
 //     navigation: PropTypes.object.isRequired,
 // };
-export default connect(mapStateToProps, actions)(SearchScreen);
+export default connect(mapStateToProps, actions)(CompanyCard);

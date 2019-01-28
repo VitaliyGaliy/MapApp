@@ -12,6 +12,7 @@ export default StyleSheet.create({
     marginTop: 2,
   },
   listContainer: {
+    flex: 1,
     margin: 15,
   },
   itemWrapper: {
