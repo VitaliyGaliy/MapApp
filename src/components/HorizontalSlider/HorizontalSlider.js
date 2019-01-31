@@ -1,74 +1,101 @@
 import React, { Component } from 'react';
 import {
-  Platform, StyleSheet, Text, View, FlatList, Dimensions,
+  View, FlatList, Dimensions,
 } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
-import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 import CompanyCard from '../CompanyCard/CompanyCard';
 import styles from './styles';
+import colors from '../../styles/colors';
 
 class HorizontalSlider extends Component {
   static navigationOptions = {
     title: 'Search',
   }
 
-
   state = {
-    currentItemIndex: 0,
     items: [],
     spinner: false,
+    autoChangeSlide: false,
   }
 
+  viewabilityConfig = {
+    itemVisiblePercentThreshold: 50,
+  };
+
   componentDidMount() {
-    const { items } = this.props;
+    const { data } = this.props;
+
+    const { spinner } = this.state;
     this.setState({
-      items: items.slice(0, 2),
-      spinner: !this.state.spinner,
+      items: data.slice(0, 2),
+      spinner: !spinner,
     });
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.currentItemIndex !== nextProps.currentItemIndex) {
+    const { spinner, autoChangeSlide } = this.state;
+    const { isSuppliersData } = this.props;
+    if (this.props.currentItemIndex !== nextProps.currentItemIndex && !isSuppliersData) {
+      this.setState({
+        spinner: !spinner,
+        autoChangeSlide: !autoChangeSlide,
+      });
       this.flatListRef.scrollToIndex({ animated: false, index: nextProps.currentItemIndex });
     }
   }
 
+  onViewableItemsChanged = ({ viewableItems }) => {
+    const { currentItemIndex } = this.props;
+    const { autoChangeSlide, spinner } = this.state;
+    if (viewableItems[0] && viewableItems[0].index === currentItemIndex && autoChangeSlide) {
+      this.setState({
+        spinner: !spinner,
+        autoChangeSlide: !autoChangeSlide,
+      });
+    }
+  };
 
   keyExtractor = (item, index) => item.id;
 
-
   render() {
     const { width } = Dimensions.get('window');
-    const { items } = this.state;
-    // const { currentItemIndex } = this.state;
+
+    const { items, spinner, autoChangeSlide } = this.state;
+    const { currentItemIndex, isSuppliersData } = this.props;
 
     return (
       <View style={styles.container}>
         <NavigationEvents
           onDidFocus={() => {
-            const { items } = this.props;
+            const { data } = this.props;
             this.setState({
-              items,
-              spinner: !this.state.spinner,
+              items: data,
+              spinner: false,
             });
           }}
         />
         <Spinner
-          visible={this.state.spinner}
-          textContent="Loading..."
+          visible={spinner}
+          color="black"
+          overlayColor={autoChangeSlide ? 'transparent' : 'rgba(0, 0, 0, 0.25)'}
+          textContent={!autoChangeSlide && 'Loading...'}
           textStyle={styles.spinnerTextStyle}
         />
         {
-          !!items.length && (
+          (!!items.length && !isSuppliersData) && (
             <FlatList
+              style={{ backgroundColor: colors.blueLight }}
               ref={(ref) => { this.flatListRef = ref; }}
+              onViewableItemsChanged={this.onViewableItemsChanged}
+              viewabilityConfig={this.viewabilityConfig}
               keyExtractor={this.keyExtractor}
               data={items}
               horizontal
               initialNumToRender={items.length}
               onScrollToIndexFailed={() => { }}
+              showsHorizontalScrollIndicator={false}
               // getItemLayout={this.getItemLayout}
               ItemSeparatorComponent={() => <View style={{ margin: -1 }} />}
               renderItem={({ item, index }) => (
@@ -80,16 +107,18 @@ class HorizontalSlider extends Component {
             />
           )
         }
+        {
+          (!!items.length
+            && isSuppliersData) && (
+            <CompanyCard
+              item={items[currentItemIndex]}
+              customWidth={width}
+            />
+          )
+        }
       </View>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  currentItemIndex: state.map.currentItemIndex,
-});
-
-// SearchScreen.propTypes = {
-//     navigation: PropTypes.object.isRequired,
-// };
-export default connect(mapStateToProps)(HorizontalSlider);
+export default HorizontalSlider;

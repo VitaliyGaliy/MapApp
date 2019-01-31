@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
     width: '100%',
-    flex: 1,
+    // flex: 1,
     // backgroundColor: 'gray',
   },
   infoContainer: {
@@ -33,7 +34,11 @@ export default StyleSheet.create({
   },
   mainTitle: {
     marginLeft: 13,
-    fontSize: 17,
+    fontFamily: 'OpenSans',
+    fontSize: 11,
+    // lineHeight: 20,
+    fontWeight: 'bold',
+    color: colors.blue,
   },
   itemWraper: {
     flexDirection: 'row',
@@ -44,8 +49,20 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  itemAddress: {
+    flex: 8,
+    fontFamily: 'OpenSans',
+    fontSize: 9,
+    textAlign: 'left',
+    color: colors.gray,
+    maxHeight: 49,
+  },
   itemText: {
     flex: 8,
+    fontFamily: 'OpenSans',
+    fontSize: 9,
+    textAlign: 'left',
+    color: colors.gray,
   },
   itemIcon: {
     marginLeft: 10,

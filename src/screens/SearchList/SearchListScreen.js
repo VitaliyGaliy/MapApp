@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  FlatList, Text, View, TextInput, TouchableHighlight,
+  FlatList, Text, View, TextInput, TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
 import Feather from 'react-native-vector-icons/dist/Feather';
@@ -9,7 +9,7 @@ import HeaderButton from '../../components/HeaderButton/HeaderButton';
 
 import { actions } from '../../models/search';
 
-class SearchList extends Component {
+class SearchListScreen extends Component {
   static navigationOptions = {
     title: 'Search',
   }
@@ -70,7 +70,7 @@ class SearchList extends Component {
   keyExtractor = (item, index) => item.id;
 
   render() {
-    const { searchList: { items }, navigation: { push, navigate } } = this.props;
+    const { searchList: { items }, navigation: { navigate } } = this.props;
     const { searchVal, nameActiveBtn } = this.state;
 
     return (
@@ -103,10 +103,11 @@ class SearchList extends Component {
             value={searchVal}
             onChangeText={text => this.onSearchValueChange(text)}
           />
-          <TouchableHighlight
+          <TouchableOpacity
             onPress={() => {
-              console.log('TouchableHighlight');
-              push('SearchResult');
+              if (items.length) {
+                navigate('SearchResultScreen');
+              }
             }}
           >
             <Feather
@@ -115,17 +116,17 @@ class SearchList extends Component {
               size={50}
               color="#900"
             />
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.listContainer}>
           <FlatList
             data={items}
             keyExtractor={this.keyExtractor}
-            ItemSeparatorComponent={() => <View style={{ borderTopWidth: 1, borderTopColor: 'black' }} />}
+            ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
             renderItem={({ item }) => (
               <View style={styles.itemWrapper}>
-                <Text>{item.c_name}</Text>
+                <Text style={styles.itemText}>{item.c_name}</Text>
               </View>
             )}
             onEndReached={this.handleLoadMore}
@@ -141,7 +142,7 @@ const mapStateToProps = state => ({
   searchList: state.search.searchList,
 });
 
-// SearchScreen.propTypes = {
+// SearchListScreen.propTypes = {
 //     navigation: PropTypes.object.isRequired,
 // };
-export default connect(mapStateToProps, actions)(SearchList);
+export default connect(mapStateToProps, actions)(SearchListScreen);

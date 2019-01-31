@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
-  Platform, StyleSheet, Text, View, FlatList,
+  View, FlatList,
 } from 'react-native';
 import { connect } from 'react-redux';
-import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import CompanyCard from '../../components/CompanyCard/CompanyCard';
 import { actions } from '../../models/suppliers';
+import SearchHeader from '../../components/SearchHeader/SearchHeader';
 
 import styles from './styles';
 
@@ -39,39 +39,28 @@ class SuppliersScreen extends Component {
     }
   }
 
+  keyExtractor = (item, index) => item.id;
+
   render() {
-    const { suppliersList: { items } } = this.props;
-    console.log('this.state.page', this.state.page);
+    const { suppliersList: { items }, navigation: { navigate } } = this.props;
 
     return (
       <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <View style={[styles.button]}>
-            <Ionicons
-              style={styles.itemIcon}
-              name="ios-mail"
-              size={14}
-              color="#900"
-            />
-            <Text>Overzicht</Text>
-          </View>
-          <View style={[styles.button,
-            { borderLeftWidth: 1, borderLeftColor: '#dcdcdc' }]}
-          >
-            <Ionicons
-              style={styles.itemIcon}
-              name="ios-mail"
-              size={14}
-              color="#900"
-            />
-            <Text>Map</Text>
-          </View>
-        </View>
+        <SearchHeader
+          map="DetailsScreen"
+          navigate={navigate}
+        />
         <FlatList
           data={items}
+          keyExtractor={this.keyExtractor}
           ItemSeparatorComponent={() => <View style={{ borderTopWidth: 1, borderTopColor: 'black' }} />}
           renderItem={({ item }) => (
-            <CompanyCard item={item} />
+            <CompanyCard
+              item={item}
+              handler={() => navigate('DetailsScreen', {
+                itemId: [item],
+              })}
+            />
           )}
           onEndReached={this.handleLoadMore}
           onEndReachedThreshold={0.01}

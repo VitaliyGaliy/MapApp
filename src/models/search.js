@@ -39,8 +39,6 @@ export default function reducer(state = initialState, action) {
 const URL = 'https://veluweb.nl/2018/extranet/api/v1.php?method=getCompanies';
 
 export const setSearchList = (searchVal, type, page) => (dispatch) => {
-  console.log(searchVal, type, page);
-
   axios.get(URL, {
     params: {
       page,

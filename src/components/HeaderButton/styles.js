@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 export default StyleSheet.create({
   button: {
@@ -9,12 +10,15 @@ export default StyleSheet.create({
     marginRight: 1,
     paddingBottom: 10,
     paddingTop: 10,
-    backgroundColor: 'white',
   },
   itemIcon: {
     marginRight: 10,
   },
   text: {
-    // fontSize: 12,
+    fontFamily: 'OpenSans',
+    fontSize: 10,
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    color: colors.red,
   },
 });

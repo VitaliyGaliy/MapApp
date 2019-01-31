@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
@@ -27,9 +28,17 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: 'red',
   },
-  // text:{
-
-  // },
+  itemSeparator: {
+    borderTopWidth: 1,
+    borderTopColor: colors.gray,
+  },
+  itemText: {
+    fontFamily: 'OpenSans',
+    fontSize: 13,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    color: colors.gray,
+  },
   // text:{
 
   // },

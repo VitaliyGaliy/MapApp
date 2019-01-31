@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet, View, Dimensions,
+  Dimensions,
 } from 'react-native';
-import { connect } from 'react-redux';
+
 // import { Marker } from 'react-native-maps';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import styles from './styles';
 
-import { actions } from '../../models/map';
+import styles from './styles';
+import colors from '../../styles/colors';
 
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -19,6 +19,7 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 class Map extends Component {
   static navigationOptions = {
     title: 'Search',
+
   }
 
   constructor() {
@@ -30,13 +31,21 @@ class Map extends Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       }],
+      region: {
+        latitude: 52.0755032,
+        longitude: 4.5555928,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
+      },
+      selectedPin: -1,
     };
     this.mapRef = null;
   }
 
   componentDidMount() {
-    const { searchList } = this.props;
-    const markers = searchList.map(marker => ({
+    const { data } = this.props;
+
+    const markers = data.map(marker => ({
       latitude: parseFloat(marker.lat),
       longitude: parseFloat(marker.lng),
       latitudeDelta: LATITUDE_DELTA,
@@ -45,24 +54,15 @@ class Map extends Component {
       id: marker.id,
     }
     ));
+
     this.setState({
       markers,
     });
-    console.log('markers', markers);
-    // this.mapRef.fitToSuppliedMarkers(
-    //   markers,
-    //   true, // not animated
-    // );
-  }
-
-  shouldComponentUpdate() {
-    return true;
   }
 
   render() {
-    const { markers } = this.state;
-    const { items, setItemIndex } = this.props;
-    console.log('markers', markers);
+    const { markers, selectedPin, region } = this.state;
+    const { setItemIndex } = this.props;
 
     return (
 
@@ -70,19 +70,21 @@ class Map extends Component {
         provider={PROVIDER_GOOGLE}
         style={styles.container}
         showsUserLocation
-        region={markers[0]}
+        region={region}
         ref={(ref) => { this.mapRef = ref; }}
-      // onRegionChange={region => this.setState({ region })}
-      // onRegionChangeComplete={region => this.setState({ region })}
       >
         {
           markers.map((marker, index) => (
             <MapView.Marker
-              key={marker.id}
-              stopPropagation
+              pinColor={index === selectedPin ? colors.blue : '#e40128'}
+              key={`${marker.id}-${index}`}
               coordinate={marker}
               onPress={() => {
                 setItemIndex(index);
+                this.setState({
+                  selectedPin: index,
+                  region: marker,
+                });
               }}
               title={marker.title}
             />
@@ -94,11 +96,4 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  searchList: state.search.searchList.items,
-});
-
-// SearchScreen.propTypes = {
-//     navigation: PropTypes.object.isRequired,
-// };
-export default connect(mapStateToProps, actions)(Map);
+export default Map;

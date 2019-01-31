@@ -36,16 +36,14 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-const URL = 'https://veluweb.nl/2018/extranet/api.php?method=getCompanies';
+const URL = 'https://veluweb.nl/2018/extranet/api/v1.php?method=getCompanies';
 
 export const setSuppliersList = (searchVal, type, page) => (dispatch) => {
-  console.log(searchVal, type, page);
-
   axios.get(URL, {
     params: {
       page,
       limit: 20,
-      [type]: searchVal,
+      // [type]: searchVal,
       // ...(searchVal ? { b_ptag: searchVal } : {}),
     },
   })

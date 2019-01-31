@@ -14,8 +14,6 @@ import styles from './styles';
 
 
 class CompanyCard extends Component {
-
-
   render() {
     const { customWidth, item, handler } = this.props;
 
@@ -44,7 +42,7 @@ class CompanyCard extends Component {
                     color="#900"
                   />
                 </View>
-                <Text style={styles.itemText}>{`${item.straat} ${item.huisnummer} ${item.provincie}`}</Text>
+                <Text style={styles.itemAddress}>{` ${item.c_address}`}</Text>
               </View>
               <View style={styles.itemWraper}>
                 <View style={styles.iconWraper}>
