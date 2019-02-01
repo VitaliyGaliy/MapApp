@@ -22,7 +22,6 @@ class DetailsScreen extends Component {
       setItemIndex, currentItemIndex,
     } = this.props;
     const singleItemData = navigation.getParam('itemId');
-    console.log('singleItemData', singleItemData);
 
     const data = singleItemData || suppliersList;
     return (

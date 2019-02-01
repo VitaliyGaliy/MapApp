@@ -18,11 +18,16 @@ export const defaultStackStyle = {
 
 export const defaultTabsStyle = {
   tabBarOptions: {
-    activeTintColor: colors.white,
+    activeBackgroundColor: colors.white,
+    inactiveTintColor: colors.white,
+    activeTintColor: colors.gray,
     labelStyle: {
       fontSize: 12,
-      color: colors.white,
+      // color: colors.white,
+      marginBottom: 7,
     },
+    iconStyle: { height: 300, width: 30 },
+
     style: {
       backgroundColor: colors.gray,
       color: colors.white,

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 export default StyleSheet.create({
 
@@ -22,6 +23,7 @@ export default StyleSheet.create({
   },
   itemIcon: {
     marginRight: 10,
+    color: colors.red,
   },
   // text:{
 

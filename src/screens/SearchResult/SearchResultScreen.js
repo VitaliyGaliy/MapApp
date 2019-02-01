@@ -3,8 +3,8 @@ import {
   Platform, StyleSheet, Text, View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import styles from './styles';
 
+import styles from './styles';
 import { actions } from '../../models/search';
 import Map from '../../components/Map/Map';
 import HorizontalSlider from '../../components/HorizontalSlider/HorizontalSlider';

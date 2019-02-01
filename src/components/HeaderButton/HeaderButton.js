@@ -17,7 +17,7 @@ export default ({
           <Icon
             style={styles.itemIcon}
             name={name}
-            size={14}
+            size={10}
             color="#900"
           />
         )}

@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import styles from './styles';
+import CustomIcon from '../../styles/CustomIcon';
 
 class SearchHeader extends Component {
   static navigationOptions = {
@@ -33,11 +34,9 @@ class SearchHeader extends Component {
             { borderLeftWidth: 1, borderLeftColor: '#dcdcdc' }]}
           onPress={() => navigate(map)}
         >
-          <Ionicons
+          <CustomIcon
             style={styles.itemIcon}
-            name="ios-mail"
-            size={14}
-            color="#900"
+            name="map-top-of-app"
           />
           <Text>Map</Text>
         </TouchableOpacity>
