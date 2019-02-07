@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   Text, View, TouchableOpacity,
 } from 'react-native';
-import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import styles from './styles';
 import CustomIcon from '../../styles/CustomIcon';
 
@@ -13,26 +12,25 @@ class SearchHeader extends Component {
 
 
   render() {
-    const { navigate, map, mainScreen } = this.props;
+    const { changeComponent } = this.props;
 
     return (
       <View style={styles.headerContainer}>
         <TouchableOpacity
           style={[styles.button]}
-          onPress={() => navigate(mainScreen)}
+          onPress={() => changeComponent('list')}
         >
-          <Ionicons
+          <CustomIcon
             style={styles.itemIcon}
-            name="ios-mail"
-            size={14}
+            name="Overzicht"
             color="#900"
           />
           <Text>Overzicht</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button,
-            { borderLeftWidth: 1, borderLeftColor: '#dcdcdc' }]}
-          onPress={() => navigate(map)}
+          { borderLeftWidth: 1, borderLeftColor: '#dcdcdc' }]}
+          onPress={() => changeComponent('map')}
         >
           <CustomIcon
             style={styles.itemIcon}

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {
-  View, FlatList,
+  View, FlatList, AsyncStorage,
 } from 'react-native';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import CompanyCard from '../../components/CompanyCard/CompanyCard';
 import { actions } from '../../models/suppliers';
-import SearchHeader from '../../components/SearchHeader/SearchHeader';
+import { setItemIndex } from '../../models/map';
+import MainComponent from '../../components/DetailsComponent/MainComponent';
 
-import styles from './styles';
 
 class SuppliersScreen extends Component {
   static navigationOptions = {
@@ -19,8 +19,9 @@ class SuppliersScreen extends Component {
     page: 1,
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { setSuppliersList } = this.props;
+
     const { searchVal, type, page } = this.state;
     setSuppliersList(searchVal, type, page);
   }
@@ -28,6 +29,7 @@ class SuppliersScreen extends Component {
   handleLoadMore = () => {
     const { type, page, searchVal } = this.state;
     const { loadMoreItems, suppliersList: { items, count } } = this.props;
+
     if (items.length < count) {
       this.setState(
         {
@@ -39,43 +41,35 @@ class SuppliersScreen extends Component {
     }
   }
 
-  keyExtractor = (item, index) => item.id;
+  keyExtractor = item => item.id;
 
   render() {
-    const { suppliersList: { items }, navigation: { navigate } } = this.props;
+    const { suppliersList: { items }, setItemIndex, currentItemIndex } = this.props;
 
     return (
-      <View style={styles.container}>
-        <SearchHeader
-          map="DetailsScreen"
-          navigate={navigate}
-        />
-        <FlatList
-          data={items}
-          keyExtractor={this.keyExtractor}
-          ItemSeparatorComponent={() => <View style={{ borderTopWidth: 1, borderTopColor: 'black' }} />}
-          renderItem={({ item }) => (
-            <CompanyCard
-              item={item}
-              handler={() => navigate('DetailsScreen', {
-                itemId: [item],
-              })}
-            />
-          )}
-          onEndReached={this.handleLoadMore}
-          onEndReachedThreshold={0.01}
-        />
-
-      </View>
+      <MainComponent
+        items={items}
+        handleLoadMore={this.handleLoadMore}
+        setItemIndex={setItemIndex}
+        currentItemIndex={currentItemIndex}
+      />
     );
   }
 }
 
 const mapStateToProps = state => ({
   suppliersList: state.suppliers.suppliersList,
+  currentItemIndex: state.map.currentItemIndex,
 });
 
-// SearchScreen.propTypes = {
-//     navigation: PropTypes.object.isRequired,
+// SuppliersScreen.defaultProps = {
+//   count: 0,
 // };
-export default connect(mapStateToProps, actions)(SuppliersScreen);
+
+SuppliersScreen.propTypes = {
+  setItemIndex: PropTypes.func.isRequired,
+  currentItemIndex: PropTypes.number,
+  loadMoreItems: PropTypes.func.isRequired,
+  suppliersList: PropTypes.object.isRequired,
+};
+export default connect(mapStateToProps, { ...actions, setItemIndex })(SuppliersScreen);

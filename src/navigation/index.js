@@ -15,18 +15,25 @@ import {
   FavoriteScreen,
   AccountScreen,
   SearchResultScreen,
-  DetailsScreen,
 } from '../screens';
 
 const getIcon = name => ({ tintColor }) => <CustomIcon name={name} size={15} color={tintColor} />;
 
-const Soeken = createStackNavigator({ SearchListScreen, SearchResultScreen }, {
+const Soeken = createStackNavigator({
+  SearchListScreen,
+  SearchResultScreen,
+}, {
   ...defaultStackStyle,
   navigationOptions: {
-    tabBarIcon: getIcon('star-1'),
+    tabBarIcon: getIcon('Search'),
   },
 });
-const Leveranciers = createStackNavigator({ SuppliersScreen, DetailsScreen }, defaultStackStyle);
+const Leveranciers = createStackNavigator({ SuppliersScreen }, {
+  ...defaultStackStyle,
+  navigationOptions: {
+    tabBarIcon: getIcon('Suppliers'),
+  },
+});
 const Favorieten = createStackNavigator({ FavoriteScreen }, {
   ...defaultStackStyle,
   navigationOptions: {
@@ -36,6 +43,7 @@ const Favorieten = createStackNavigator({ FavoriteScreen }, {
 const Account = createStackNavigator({ AccountScreen }, {
   ...defaultStackStyle,
   navigationOptions: {
+    tabBarIcon: getIcon('Account'),
     tabBarLabel: 'Mijn account',
   },
 });

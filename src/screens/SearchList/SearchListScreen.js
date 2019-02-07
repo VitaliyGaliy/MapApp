@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import Feather from 'react-native-vector-icons/dist/Feather';
 import styles from './styles';
 import HeaderButton from '../../components/HeaderButton/HeaderButton';
-
 import { actions } from '../../models/search';
 
 class SearchListScreen extends Component {
@@ -67,10 +66,14 @@ class SearchListScreen extends Component {
     }
   }
 
-  keyExtractor = (item, index) => item.id;
+  keyExtractor = item => item.id;
 
   render() {
-    const { searchList: { items }, navigation: { navigate } } = this.props;
+    const {
+      searchList: { items }, setItemIndex,
+      currentItemIndex, navigation: { navigate },
+
+    } = this.props;
     const { searchVal, nameActiveBtn } = this.state;
 
     return (
@@ -140,6 +143,7 @@ class SearchListScreen extends Component {
 
 const mapStateToProps = state => ({
   searchList: state.search.searchList,
+  currentItemIndex: state.map.currentItemIndex,
 });
 
 // SearchListScreen.propTypes = {

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
-  View, FlatList, Dimensions,
+  View, FlatList, Dimensions, Text,
 } from 'react-native';
-import { NavigationEvents } from 'react-navigation';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Slider from '../ScrollList';
 
 import CompanyCard from '../CompanyCard/CompanyCard';
 import styles from './styles';
@@ -14,35 +14,42 @@ class HorizontalSlider extends Component {
     title: 'Search',
   }
 
-  state = {
-    items: [],
-    spinner: false,
-    autoChangeSlide: false,
+  constructor(props) {
+    super(props);
+    const { singleItemSelected } = this.props;
+
+    this.state = {
+      items: [],
+      singleItemSelected,
+      spinner: true,
+      autoChangeSlide: false,
+      currentIndex: 0,
+    };
+    this.recyclerRef = React.createRef();
   }
 
-  viewabilityConfig = {
-    itemVisiblePercentThreshold: 50,
-  };
-
   componentDidMount() {
-    const { data } = this.props;
+    const { data, singleItemSelected } = this.props;
 
     const { spinner } = this.state;
-    this.setState({
-      items: data.slice(0, 2),
-      spinner: !spinner,
-    });
+    setTimeout(() => {
+      this.setState({
+        items: singleItemSelected || data,
+        spinner: !spinner,
+      });
+    }, 100);
   }
 
   componentWillReceiveProps(nextProps) {
     const { spinner, autoChangeSlide } = this.state;
-    const { isSuppliersData } = this.props;
-    if (this.props.currentItemIndex !== nextProps.currentItemIndex && !isSuppliersData) {
+    const { singleItemSelected } = this.props;
+
+    if (this.props.currentItemIndex !== nextProps.currentItemIndex && !singleItemSelected) {
       this.setState({
-        spinner: !spinner,
-        autoChangeSlide: !autoChangeSlide,
+        // spinner: !spinner,
+        // autoChangeSlide: !autoChangeSlide,
+        currentIndex: nextProps.currentItemIndex,
       });
-      this.flatListRef.scrollToIndex({ animated: false, index: nextProps.currentItemIndex });
     }
   }
 
@@ -57,25 +64,21 @@ class HorizontalSlider extends Component {
     }
   };
 
-  keyExtractor = (item, index) => item.id;
-
   render() {
     const { width } = Dimensions.get('window');
 
-    const { items, spinner, autoChangeSlide } = this.state;
-    const { currentItemIndex, isSuppliersData } = this.props;
+    const {
+      items, spinner, autoChangeSlide, currentIndex,
+    } = this.state;
+    const {
+      currentItemIndex, singleItemSelected, isHorizontal, handleLoadMore,
+    } = this.props;
 
     return (
-      <View style={styles.container}>
-        <NavigationEvents
-          onDidFocus={() => {
-            const { data } = this.props;
-            this.setState({
-              items: data,
-              spinner: false,
-            });
-          }}
-        />
+      <View style={[styles.container,
+      { flexDirection: 'row' },
+      ]}
+      >
         <Spinner
           visible={spinner}
           color="black"
@@ -84,34 +87,30 @@ class HorizontalSlider extends Component {
           textStyle={styles.spinnerTextStyle}
         />
         {
-          (!!items.length && !isSuppliersData) && (
-            <FlatList
-              style={{ backgroundColor: colors.blueLight }}
-              ref={(ref) => { this.flatListRef = ref; }}
-              onViewableItemsChanged={this.onViewableItemsChanged}
-              viewabilityConfig={this.viewabilityConfig}
-              keyExtractor={this.keyExtractor}
-              data={items}
-              horizontal
-              initialNumToRender={items.length}
-              onScrollToIndexFailed={() => { }}
-              showsHorizontalScrollIndicator={false}
-              // getItemLayout={this.getItemLayout}
-              ItemSeparatorComponent={() => <View style={{ margin: -1 }} />}
-              renderItem={({ item, index }) => (
+          items.length > 1 && (
+            <Fragment>
+              {/* needs to set height of whole scrollView */}
+              <View style={{ width: 0 }}>
                 <CompanyCard
-                  item={item}
-                  customWidth={width}
+                  item={items[0]}
                 />
-              )}
-            />
+              </View>
+              {/* -------------- */}
+              <Slider
+                currentIndex={currentIndex}
+                setRef={this.recyclerRef}
+                items={items}
+                isHorizontal={isHorizontal}
+                handleLoadMore={handleLoadMore}
+
+              />
+            </Fragment>
           )
         }
         {
-          (!!items.length
-            && isSuppliersData) && (
+          !!singleItemSelected && (
             <CompanyCard
-              item={items[currentItemIndex]}
+              item={items[0]}
               customWidth={width}
             />
           )

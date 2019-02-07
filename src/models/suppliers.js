@@ -1,13 +1,18 @@
 import axios from 'axios';
+import { AsyncStorage } from 'react-native';
 
 const types = {
   SET_SUPPLIERS_LIST: 'SET_SUPPLIERS_LIST',
   LOAD_MORE_SUPPLIERS: 'LOAD_MORE_SUPPLIERS',
   CLEAR_LIST: 'CLEAR_LIST',
+  SET_ITEM_TO_FAVOURITE: 'SET_ITEM_TO_FAVOURITE',
 };
 
 const initialState = {
-  suppliersList: [],
+  suppliersList: {
+    count: 0,
+    items: []
+  },
 };
 
 export default function reducer(state = initialState, action) {
@@ -31,6 +36,26 @@ export default function reducer(state = initialState, action) {
       };
     }
 
+    case 'SET_ITEM_TO_FAVOURITE': {
+      const selectedItem = state.suppliersList.items.map((item) => {
+        const newItem = item;
+        if (item.id === action.item.id && !item.isSelected) {
+          newItem.isSelected = true;
+        } else if (item.id === action.item.id && item.isSelected) {
+          newItem.isSelected = false;
+        }
+        return newItem;
+      });
+
+      return {
+        ...state,
+        suppliersList: {
+          ...state.suppliersList,
+          items: selectedItem,
+        },
+      };
+    }
+
     default:
       return state;
   }
@@ -38,24 +63,37 @@ export default function reducer(state = initialState, action) {
 
 const URL = 'https://veluweb.nl/2018/extranet/api/v1.php?method=getCompanies';
 
-export const setSuppliersList = (searchVal, type, page) => (dispatch) => {
-  axios.get(URL, {
-    params: {
-      page,
-      limit: 20,
-      // [type]: searchVal,
-      // ...(searchVal ? { b_ptag: searchVal } : {}),
-    },
-  })
-    .then(({ data }) => {
-      dispatch({
-        type: types.SET_SUPPLIERS_LIST,
-        suppliersList: data,
-      });
-    })
-    .catch((error) => {
-      console.log(error);
+export const setSuppliersList = (searchVal, type, page) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(URL, {
+      params: {
+        page,
+        limit: 20,
+        // [type]: searchVal,
+        // ...(searchVal ? { b_ptag: searchVal } : {}),
+      },
     });
+
+    const isItemFavourite = await AsyncStorage.getItem('favourite') || '[]';
+
+    const isItemFavouriteParsed = JSON.parse(isItemFavourite);
+    data.items.map((fetchedData) => {
+      const newFetchedData = fetchedData;
+      isItemFavouriteParsed.forEach((parsed) => {
+        if (fetchedData.id === parsed.id) {
+          newFetchedData.isSelected = true;
+        }
+      });
+      return newFetchedData;
+    });
+
+    dispatch({
+      type: types.SET_SUPPLIERS_LIST,
+      suppliersList: data,
+    });
+  } catch (error) {
+    console.log('error', error);
+  }
 };
 
 export const loadMoreItems = (searchVal, type, page) => (dispatch) => {
