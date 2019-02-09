@@ -4,7 +4,7 @@ import colors from '../../styles/colors';
 export default StyleSheet.create({
   container: {
     width: '100%',
-    // flex: 1,
+
     // backgroundColor: 'gray',
   },
   infoContainer: {
@@ -16,6 +16,9 @@ export default StyleSheet.create({
     borderColor: '#e1e2e3',
     marginLeft: 2,
     marginRight: 2,
+  },
+  leftWrapper: {
+    flexDirection: 'row',
   },
   imageWrapper: {
     // flex: 1,

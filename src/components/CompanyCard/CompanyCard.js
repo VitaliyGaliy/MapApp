@@ -16,101 +16,103 @@ const URI = 'https://veluweb.nl/2018/extranet';
 const CompanyCard = ({
   customWidth, item, handler, addItemToFavourite,
 }) => (
-  <TouchableOpacity
-      // onPress={handler}
-      style={[styles.container, { width: customWidth }]}
-    >
-      <Fragment>
-        <View style={styles.infoContainer}>
-          <View style={styles.imageWrapper}>
-            <Image
-              style={styles.image}
-              source={{ uri: `${URI}/${item.avatar}` }}
-            />
-          </View>
+  <View style={[styles.container, { width: customWidth }]}>
 
-          <View style={styles.infoWrapper}>
-            <Text style={styles.mainTitle}>{item.c_name}</Text>
-            <View style={styles.itemWraper}>
-              <View style={styles.iconWraper}>
-                <Icon
-                  style={styles.itemIcon}
-                  name="map-marker"
-                  size={14}
-                  color="#900"
-                />
-              </View>
-              <Text style={styles.itemAddress}>{` ${item.c_address}`}</Text>
+      <View style={styles.infoContainer}>
+
+        <TouchableOpacity style={styles.leftWrapper}>
+          <Fragment>
+            <View style={styles.imageWrapper}>
+              <Image
+                style={styles.image}
+                source={{ uri: `${URI}/${item.avatar}` }}
+              />
             </View>
-            <View style={styles.itemWraper}>
-              <View style={styles.iconWraper}>
-                <CustomIcon
-                  style={styles.itemIcon}
-                  name="phone"
-                  size={8}
-                  color={colors.gray}
-                />
+
+            <View style={styles.infoWrapper}>
+              <Text style={styles.mainTitle}>{item.c_name}</Text>
+              <View style={styles.itemWraper}>
+                <View style={styles.iconWraper}>
+                  <Icon
+                    style={styles.itemIcon}
+                    name="map-marker"
+                    size={14}
+                    color="#900"
+                  />
+                </View>
+                <Text style={styles.itemAddress}>{` ${item.c_address}`}</Text>
               </View>
-              <Text style={styles.itemText}>{item.c_phone}</Text>
-            </View>
-            <View style={styles.itemWraper}>
-              <View style={styles.iconWraper}>
-                <CustomIcon
-                  style={styles.itemIcon}
-                  name="mail"
-                  size={8}
-                  color={colors.gray}
-                />
+              <View style={styles.itemWraper}>
+                <View style={styles.iconWraper}>
+                  <CustomIcon
+                    style={styles.itemIcon}
+                    name="phone"
+                    size={8}
+                    color={colors.gray}
+                  />
+                </View>
+                <Text style={styles.itemText}>{item.c_phone}</Text>
               </View>
-              <Text style={styles.itemText}>{item.c_email}</Text>
-            </View>
-            <View style={styles.itemWraper}>
-              <View style={styles.iconWraper}>
-                <CustomIcon
-                  style={styles.itemIcon}
-                  name="internet"
-                  size={10}
-                  color={colors.gray}
-                />
+              <View style={styles.itemWraper}>
+                <View style={styles.iconWraper}>
+                  <CustomIcon
+                    style={styles.itemIcon}
+                    name="mail"
+                    size={8}
+                    color={colors.gray}
+                  />
+                </View>
+                <Text style={styles.itemText}>{item.c_email}</Text>
               </View>
-              <Text style={styles.itemText}>{item.c_website}</Text>
+              <View style={styles.itemWraper}>
+                <View style={styles.iconWraper}>
+                  <CustomIcon
+                    style={styles.itemIcon}
+                    name="internet"
+                    size={10}
+                    color={colors.gray}
+                  />
+                </View>
+                <Text style={styles.itemText}>{item.c_website}</Text>
+              </View>
             </View>
-          </View>
-          <TouchableOpacity
-            style={styles.rightSideContainer}
-            onPress={() => {
-              addItemToFavourite(item);
-            }
-            }
-          >
-            <CustomIcon
-              // style={styles.itemIcon}
-              name={item.isSelected ? 'star-2' : 'star-1'}
-              size={15}
-              color={colors.red}
-            />
-            <Text>14.2 km</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonsWrapper}>
-          <HeaderButton
-            Icon={CustomIcon}
-            text="bericht"
-            name="mail"
+          </Fragment>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.rightSideContainer}
+          onPress={() => {
+            addItemToFavourite(item);
+          }
+          }
+        >
+          <CustomIcon
+            // style={styles.itemIcon}
+            name={item.isSelected ? 'star-2' : 'star-1'}
+            size={15}
+            color={colors.red}
           />
-          <HeaderButton
-            Icon={CustomIcon}
-            text="bell direct"
-            name="phone"
-          />
-          <HeaderButton
-            Icon={CustomIcon}
-            text="delen"
-            name="sharing-interface"
-          />
-        </View>
-      </Fragment>
-    </TouchableOpacity>
+          <Text>14.2 km</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.buttonsWrapper}>
+        <HeaderButton
+          Icon={CustomIcon}
+          text="bericht"
+          name="mail"
+        />
+        <HeaderButton
+          Icon={CustomIcon}
+          text="bell direct"
+          name="phone"
+        />
+        <HeaderButton
+          Icon={CustomIcon}
+          text="delen"
+          name="sharing-interface"
+        />
+      </View>
+    </View>
+
 );
 
 

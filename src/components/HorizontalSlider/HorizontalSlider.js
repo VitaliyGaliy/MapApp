@@ -24,6 +24,7 @@ class HorizontalSlider extends Component {
       spinner: true,
       autoChangeSlide: false,
       currentIndex: 0,
+      height: 0,
     };
     this.recyclerRef = React.createRef();
   }
@@ -68,7 +69,7 @@ class HorizontalSlider extends Component {
     const { width } = Dimensions.get('window');
 
     const {
-      items, spinner, autoChangeSlide, currentIndex,
+      items, spinner, autoChangeSlide, currentIndex, height,
     } = this.state;
     const {
       currentItemIndex, singleItemSelected, isHorizontal, handleLoadMore,
@@ -90,20 +91,33 @@ class HorizontalSlider extends Component {
           items.length > 1 && (
             <Fragment>
               {/* needs to set height of whole scrollView */}
-              <View style={{ width: 0 }}>
+
+              <View
+                style={{ position: 'absolute' }}
+                onLayout={(event) => {
+                  const {
+                    x, y, width, height,
+                  } = event.nativeEvent.layout;
+                  this.setState({ height });
+                  console.log('height', height);
+                }}
+
+              >
                 <CompanyCard
                   item={items[0]}
                 />
               </View>
-              {/* -------------- */}
-              <Slider
-                currentIndex={currentIndex}
-                setRef={this.recyclerRef}
-                items={items}
-                isHorizontal={isHorizontal}
-                handleLoadMore={handleLoadMore}
+              <View style={{ height }}>
+                <Slider
+                  currentIndex={currentIndex}
+                  setRef={this.recyclerRef}
+                  items={items}
+                  isHorizontal={isHorizontal}
+                  handleLoadMore={handleLoadMore}
 
-              />
+                />
+              </View>
+
             </Fragment>
           )
         }

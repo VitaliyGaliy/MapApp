@@ -14,12 +14,11 @@ export default function reducer(state = initialState, action) {
     case 'SET_FAVOURITE_ITEMS': {
       return {
         ...state,
-        items: state.items.concat(action.items),
+        items: action.items,
       };
     }
     case 'SET_ITEM_TO_FAVOURITE': {
       const index = state.items.findIndex(item => item.id === action.item.id);
-
       if (index === -1) {
         return {
           ...state,
@@ -39,21 +38,22 @@ export default function reducer(state = initialState, action) {
 
 export const addItemToFavourite = item => async (dispatch) => {
   try {
-    const favouriteItem = await AsyncStorage.getItem('favourite') || '[]';
-    let parsedItem = JSON.parse(favouriteItem);
+    const favItem = { ...item, isSelected: true };
+    const favouriteItems = await AsyncStorage.getItem('favourite') || '[]';
+    let parsedItems = JSON.parse(favouriteItems);
 
-    const index = parsedItem.findIndex(i => i.id === item.id);
+    const index = parsedItems.findIndex(i => i.id === favItem.id);
     if (index === -1) {
-      parsedItem = parsedItem.concat(item);
+      parsedItems = parsedItems.concat(favItem);
     } else {
-      parsedItem = [...parsedItem.slice(0, index),
-        ...parsedItem.slice(index + 1)];
+      parsedItems = [...parsedItems.slice(0, index),
+        ...parsedItems.slice(index + 1)];
     }
-    await AsyncStorage.setItem('favourite', JSON.stringify(parsedItem));
+    await AsyncStorage.setItem('favourite', JSON.stringify(parsedItems));
 
     return dispatch({
       type: types.SET_ITEM_TO_FAVOURITE,
-      item,
+      item: favItem,
     });
   } catch (error) {
     console.log('error!!!!!', error);
