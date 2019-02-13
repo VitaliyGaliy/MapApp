@@ -5,3 +5,4 @@ export { default as SearchResultScreen } from './SearchList/SearchResultScreen';
 export { default as FavoriteScreen } from './FavoriteScreen/FavoriteScreen';
 export { default as AccountScreen } from './AccountScreen/AccountScreen';
 export { default as NewScreen } from './AccountScreen/NewScreen';
+export { default as RegisterScreen } from './RegisterScreen/RegisterScreen';

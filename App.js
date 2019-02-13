@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import {
+  Platform, StyleSheet, Text, View, StatusBar
+} from 'react-native';
 
 import { Provider, connect } from 'react-redux';
 import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
 import store from './src/store';
+import GeolocationWrapper from './src/components/Map/GeolocationWrapper';
 import Navigator from './src/navigation';
 
 const client = axios.create({
   baseURL: 'https://api.github.com',
-  responseType: 'json'
+  responseType: 'json',
 });
 
 // const instructions = Platform.select({
@@ -23,7 +26,10 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Navigator />
+        <StatusBar backgroundColor="blue" barStyle="light-content" />
+        <GeolocationWrapper>
+          <Navigator />
+        </GeolocationWrapper>
       </Provider>
 
     );

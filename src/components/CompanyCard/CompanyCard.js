@@ -14,7 +14,7 @@ import CustomIcon from '../../styles/CustomIcon';
 const URI = 'https://veluweb.nl/2018/extranet';
 
 const CompanyCard = ({
-  customWidth, item, handler, addItemToFavourite,
+  customWidth, item, handler, addItemToFavourite, distanceToUser,
 }) => (
   <View style={[styles.container, { width: customWidth }]}>
 
@@ -91,7 +91,11 @@ const CompanyCard = ({
             size={15}
             color={colors.red}
           />
-          <Text>14.2 km</Text>
+          <Text>
+            {item.distanceToUser || 0}
+            {' '}
+            km
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.buttonsWrapper}>

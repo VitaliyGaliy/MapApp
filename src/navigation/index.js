@@ -3,8 +3,11 @@ import {
   createBottomTabNavigator,
   createStackNavigator,
   createAppContainer,
+  createSwitchNavigator,
 }
   from 'react-navigation';
+
+import AuthScreen from './auth';
 
 import { defaultStackStyle, defaultTabsStyle } from './styles';
 import CustomIcon from '../styles/CustomIcon';
@@ -15,19 +18,24 @@ import {
   FavoriteScreen,
   AccountScreen,
   SearchResultScreen,
+  RegisterScreen,
 } from '../screens';
 
 const getIcon = name => ({ tintColor }) => <CustomIcon name={name} size={15} color={tintColor} />;
+
+const AuthStack = createStackNavigator({ RegisterScreen }, {
+  ...defaultStackStyle,
+});
 
 const Soeken = createStackNavigator({
   SearchListScreen,
   SearchResultScreen,
 }, {
-  ...defaultStackStyle,
-  navigationOptions: {
-    tabBarIcon: getIcon('Search'),
-  },
-});
+    ...defaultStackStyle,
+    navigationOptions: {
+      tabBarIcon: getIcon('Search'),
+    },
+  });
 const Leveranciers = createStackNavigator({ SuppliersScreen }, {
   ...defaultStackStyle,
   navigationOptions: {
@@ -58,4 +66,15 @@ const TabNav = createBottomTabNavigator(
   defaultTabsStyle,
 );
 
-export default createAppContainer(TabNav);
+export default createAppContainer(createSwitchNavigator(
+  {
+    AuthStack,
+    // AuthScreen,
+    TabNav,
+  },
+  {
+    initialRouteName: 'TabNav',
+  },
+));
+
+// export default createAppContainer(TabNav);

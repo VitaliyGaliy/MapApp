@@ -97,6 +97,7 @@ export default class ScrollList extends Component {
               style={{ backgroundColor: 'white' }}
               // contentContainerStyle={{ margin: 2, width: '100%' }}
               onEndReached={this.handleListEnd}
+              onEndReachedThreshold={500}
               dataProvider={dataProvider}
               layoutProvider={layoutProvider}
               rowRenderer={this.rowRenderer}

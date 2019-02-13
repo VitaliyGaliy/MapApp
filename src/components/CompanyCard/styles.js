@@ -8,7 +8,7 @@ export default StyleSheet.create({
     // backgroundColor: 'gray',
   },
   infoContainer: {
-    // flex: 1,
+    flex: 1,
     flexDirection: 'row',
     padding: 10,
     backgroundColor: 'white',
@@ -19,6 +19,7 @@ export default StyleSheet.create({
   },
   leftWrapper: {
     flexDirection: 'row',
+    flex: 1,
   },
   imageWrapper: {
     // flex: 1,

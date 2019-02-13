@@ -1,0 +1,111 @@
+import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
+
+export default StyleSheet.create({
+  componentContainer: {
+    flex: 1,
+    paddingLeft: 14,
+    // backgroundColor: '#eef3f6',
+  },
+  titleContainer: {
+    marginTop: 25,
+    marginRight: 38,
+  },
+  titleText: {
+    fontFamily: 'OpenSans',
+    fontSize: 11,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 17,
+    color: colors.gray,
+  },
+  mainContainerTitle: {
+    marginTop: 21,
+    fontFamily: 'OpenSans',
+    fontSize: 17,
+    fontWeight: 'bold',
+    lineHeight: 30,
+    textAlign: 'left',
+    color: colors.blue,
+  },
+  inputComponent: {
+    marginTop: 18,
+  },
+  inputTitle: {
+    fontFamily: 'OpenSans',
+    fontSize: 11,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 19,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: colors.gray,
+  },
+  input: {
+    height: 27,
+    borderRadius: 1,
+    backgroundColor: colors.white,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.18)',
+    marginTop: 10,
+    marginRight: 15,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    marginTop: 34,
+  },
+  checkbox: {
+    marginRight: 10,
+    width: 15,
+    height: 15,
+    backgroundColor: '#ffffff',
+    shadowColor: 'rgba(110, 110, 110, 0.4)',
+    shadowOffset: {
+      width: 1.1,
+      height: 0.8,
+    },
+    shadowRadius: 3,
+    shadowOpacity: 1,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.18)',
+  },
+  checkboxTitle: {
+    fontFamily: 'OpenSans',
+    fontSize: 11,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 17,
+    textAlign: 'left',
+    color: colors.gray,
+    bottom: 5,
+
+  },
+  checkboxChecked: {
+    marginLeft: 3,
+    marginBottom: 2,
+  },
+  button: {
+    paddingLeft: 34,
+    paddingRight: 34,
+    marginTop: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 'auto',
+    paddingBottom: 10,
+    paddingTop: 10,
+    backgroundColor: colors.red,
+  },
+  itemIcon: {
+    marginRight: 10,
+  },
+  text: {
+    fontFamily: 'OpenSans',
+    fontSize: 10,
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    color: colors.white,
+  },
+});

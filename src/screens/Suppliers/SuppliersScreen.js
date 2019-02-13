@@ -44,7 +44,9 @@ class SuppliersScreen extends Component {
   keyExtractor = item => item.id;
 
   render() {
-    const { suppliersList: { items }, setItemIndex, currentItemIndex } = this.props;
+    const {
+      suppliersList: { items }, setItemIndex, currentItemIndex, currentEveryHundredMeterPosition,
+    } = this.props;
 
     return (
       <MainComponent
@@ -52,6 +54,7 @@ class SuppliersScreen extends Component {
         handleLoadMore={this.handleLoadMore}
         setItemIndex={setItemIndex}
         currentItemIndex={currentItemIndex}
+        currentEveryHundredMeterPosition={currentEveryHundredMeterPosition}
       />
     );
   }
@@ -60,6 +63,7 @@ class SuppliersScreen extends Component {
 const mapStateToProps = state => ({
   suppliersList: state.suppliers.suppliersList,
   currentItemIndex: state.map.currentItemIndex,
+  currentEveryHundredMeterPosition: state.map.currentEveryHundredMeterPosition,
 });
 
 // SuppliersScreen.defaultProps = {

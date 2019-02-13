@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -63,6 +64,7 @@
 		B35238066AC24E55887ED880 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDF7820AEB8C4D52AFD28B6D /* OpenSans-Regular.ttf */; };
 		B36D20174C8243C6B4182B5B /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEC41E89DF4F4B4180F59205 /* OpenSans-LightItalic.ttf */; };
 		BB581293300241C482ABC5CB /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2E605A67D20442D80C34F2D /* libRNGestureHandler.a */; };
+		BC79009EEA164858BAE092C6 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19046C6DEEBC4131BC5C6E07 /* icomoon.ttf */; };
 		C0BBEA5918BB4F6FAC2DC984 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E0CF730A9F24B6AA2E6A695 /* OpenSans-Semibold.ttf */; };
 		CCC7DC46894943E88BC116D4 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37AD3C9E716F41A09AD8D33C /* MaterialCommunityIcons.ttf */; };
 		F59395DB21C646A40064CBB8 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59395DA21C646A40064CBB8 /* GoogleMapsBase.framework */; };
@@ -85,7 +87,6 @@
 		F593966721C64CA30064CBB8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F593966621C64CA30064CBB8 /* SystemConfiguration.framework */; };
 		F593966921C64CBB0064CBB8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F593966821C64CBB0064CBB8 /* UIKit.framework */; };
 		F5E86A54F34F4C1A84B3DD24 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9515B23E1F7F48A0A6591464 /* Entypo.ttf */; };
-		BC79009EEA164858BAE092C6 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19046C6DEEBC4131BC5C6E07 /* icomoon.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -416,6 +417,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Holland/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Holland/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		19046C6DEEBC4131BC5C6E07 /* icomoon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoon.ttf; path = ../assets/fonts/icomoon.ttf; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Holland-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Holland-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Holland-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Holland-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -472,7 +474,6 @@
 		F593966821C64CBB0064CBB8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F5A2D6AA21D7F3860001A92D /* Holland.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Holland.entitlements; path = Holland/Holland.entitlements; sourceTree = "<group>"; };
 		F5A34AB522071612000E80E8 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = icomoon.ttf; path = "../../../../Downloads/icomoon (1)/fonts/icomoon.ttf"; sourceTree = "<group>"; };
-		19046C6DEEBC4131BC5C6E07 /* icomoon.ttf */ = {isa = PBXFileReference; name = "icomoon.ttf"; path = "../assets/fonts/icomoon.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1577,7 +1578,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.holland;
 				PRODUCT_NAME = Holland;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1609,7 +1610,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.holland;
 				PRODUCT_NAME = Holland;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
